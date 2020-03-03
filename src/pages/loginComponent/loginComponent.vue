@@ -42,7 +42,7 @@
                 </section>
                 <section class="login_message">
                   <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-                  <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha">
+                  <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha" ref="captcha">
                 </section>
               </section>
             </div>
@@ -58,13 +58,13 @@
 
 <script>
 // 引入接口函数
-import {reqPwdLogin,reqSendCode,reqSmsLogin} from '../../api/index'
+import {reqPwdLogin,reqSendCode,reqSmsLogin, reqUser} from '../../api/index'
 import alertComponent  from "../../components/alertComponent/alertComponent";
+import {mapActions} from 'vuex'
 export default {
   data :function() {
     return {
       loginWay:true, //true表示短信登陆，false表示密码登录；
-      phone:'',
       time:0,
       intervalId:'',
       phone:'',
@@ -78,7 +78,7 @@ export default {
     }
   },
   methods:{
-    sendMassage:function(){
+    sendMassage: async function(){
       // 前台验证
       if(!this.intervalId){
       this.time=60;
@@ -90,43 +90,62 @@ export default {
       }, 1000);
       }
       // 发送短信
-      const result=reqSendCode(this.phone);
+      const result= await reqSendCode(this.phone);
       if(result.code===1){
         this.showAlert(result.msg);
       }
     },
-    login:function(){
+    login:async function(){
+      let result //获取user信息
       if(this.loginWay){ //短信登陆
         const {rightPhone,phone,code}=this;
         if(!rightPhone){
           //输出手机号不正确
           this.showAlert('手机号输入错误！')
+          return 
         }else if(!/^\d{6}$/.test(code)) {
           //短信验证码输入错误！请输入6位短信验证码
           this.showAlert('短信验证码输入错误！请输入6位短信验证码！')
+          return 
         }
-
+        // 短信登陆
+        result=await reqSmsLogin(phone,code);
       }else{
         const {name,password,captcha}=this;
         if(!name){
           //请输入用户名
          this.showAlert('请输入用户名!');
+         return 
         }else if(!password){
           //请输入密码！
           this.showAlert('请输入密码！')
+          return 
         }else if(!/[0-9a-zA-Z]{4}/.test(captcha)){
           //请输入四位验证码：
          this.showAlert('请输入四位验证码!')
+         return 
         }
+        // 密码登录
+        result=await reqPwdLogin({name,password,captcha});
+        this.getCaptcha();
       }
+      const user=result.data;
+      console.log(user);
+      this.setUserInfo(user);
+      if(result.code==0){
+          this.$router.replace('/person');
+        }else {
+          this.showAlert(result.msg);
+        }
     },
     showAlert:function(alertText){
       this.alertText=alertText
           this.isShowAlert=true
     },
-    getCaptcha:function(event){
-      event.target.src="http://localhost:4000/captcha?time"+Date.now();
-    }
+    getCaptcha:function(){
+      this.$refs.captcha.src="http://localhost:4000/captcha?time"+Date.now();
+    },
+    ...mapActions(['setUserInfo'])
   },
   computed:{
     rightPhone:function(){

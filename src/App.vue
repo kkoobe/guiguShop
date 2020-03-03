@@ -21,10 +21,11 @@ export default {
       this.getCategorys();
       // this.$store.dispatch('getCategorys');
       this.getShops();
+      this.getUserInfo();
     },
     methods:{
       // 拷贝方法；
-      ...mapActions(['getAddress','getCategorys','getShops'])
+      ...mapActions(['getAddress','getCategorys','getShops','getUserInfo'])
     }
 } 
 </script>
