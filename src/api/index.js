@@ -23,3 +23,8 @@ export const reqUserInfo = () => ajax(pathHeader+'/userinfo')
 // [10、用户登出](#10用户登出)<br/>
 export const reqLogout = () => ajax(pathHeader+'/logout')
 
+// mock接口；
+
+export const reqShopGoods= ()=>ajax('/goods');
+export const reqShopComment= () =>ajax('/comment');
+export const reqShopInfo = ()=>ajax('/info');

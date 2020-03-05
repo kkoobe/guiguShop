@@ -137,6 +137,7 @@ export default {
         }else {
           this.showAlert(result.msg);
         }
+        this.getCaptcha()
     },
     showAlert:function(alertText){
       this.alertText=alertText
@@ -166,7 +167,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
     .loginContainer
       width 100%
       height 100%

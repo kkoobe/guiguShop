@@ -16,7 +16,6 @@ export default {
 </script>
 
 <style>
-    
     button {
         display: block;
         background-color: red;

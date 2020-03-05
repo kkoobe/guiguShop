@@ -177,8 +177,8 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-@import "../../common/stylus/mixins.styl" 
+<style lang="stylus" >
+    @import "../../common/stylus/mixins.styl" 
     .msite //首页
         width 100%
         .header

@@ -22,6 +22,9 @@ export default {
       // this.$store.dispatch('getCategorys');
       this.getShops();
       this.getUserInfo();
+      // this.getShopComment();
+      //  this.getShopGoods();
+      // this.getShopInfo();
     },
     methods:{
       // 拷贝方法；

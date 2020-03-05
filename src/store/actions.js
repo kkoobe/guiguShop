@@ -3,14 +3,20 @@ import {
     RECEIVE_SHOPS,
     RECEIVE_CATEGORYS,
     RECEIVE_USER_INFO,
-    RESET_USER_INFO
+    RESET_USER_INFO,
+    RECEIVE_SHOP_COMMENT,
+    RECEIVE_SHOP_GOODS,
+    RECEIVE_SHOP_INFO
 } from './mutations-type'
 import {
     reqAddress,
     reqCategorys,
     reqShops,
     reqUserInfo,
-    reqLogout
+    reqLogout,
+    reqShopComment,
+    reqShopInfo,
+    reqShopGoods
 } from '../api/index'
 
 export default {
@@ -61,6 +67,29 @@ export default {
             commit(RESET_USER_INFO);
         }
 
+    },
+    async getShopGoods({commit}){
+        const result =await  reqShopGoods();
+        const shopGoods=result.data;
+        if(result.code===0){
+            commit(RECEIVE_SHOP_GOODS,{shopGoods})
+        }
+    },
+    async getShopInfo({commit}){
+        const result = await reqShopInfo()
+        // console.log(result);
+        const shopInfo=result.data;
+        if(result.code===0){
+            console.log(1);
+            commit(RECEIVE_SHOP_INFO,{shopInfo})
+        }
+    },
+    async getShopComment({commit}){
+        const result = await reqShopComment()
+        const shopComments=result.data;
+        if(result.code===0){
+            commit(RECEIVE_SHOP_COMMENT,{shopComments})
+        }
     }
 
 }

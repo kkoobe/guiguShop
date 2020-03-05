@@ -9,5 +9,8 @@ export default {
     categorys:[],
     shops:[],
     userInfo:{},
+    shopGoods:[],
+    shopComments:[],
+    shopInfo:{}
 
 }

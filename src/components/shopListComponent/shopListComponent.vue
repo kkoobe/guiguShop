@@ -7,7 +7,7 @@
           </div>
           <div class="shop_container">
             <ul class="shop_list" v-if="shops.length">
-              <li class="shop_li border-1px" v-for="(shop,index) in shops" :key="index">
+              <li class="shop_li border-1px" v-for="(shop,index) in shops" :key="index" @click="$router.push('/shop')">
                 <a>
                   <div class="shop_left">
                     <img class="shop_img" :src="baseImgUrl+shop.image_path">
@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" >
 @import "../../common/stylus/mixins.styl" 
   .msite_shop_list //
     top-border-1px(#e4e4e4)
