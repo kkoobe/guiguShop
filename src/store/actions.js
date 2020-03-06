@@ -6,7 +6,9 @@ import {
     RESET_USER_INFO,
     RECEIVE_SHOP_COMMENT,
     RECEIVE_SHOP_GOODS,
-    RECEIVE_SHOP_INFO
+    RECEIVE_SHOP_INFO,
+    INCREMENT_FOOD_COUNT,
+    DECREMENT_FOOD_COUNT
 } from './mutations-type'
 import {
     reqAddress,
@@ -90,6 +92,13 @@ export default {
         if(result.code===0){
             commit(RECEIVE_SHOP_COMMENT,{shopComments})
         }
+    },
+    updateFoodCount({commit},{isAdd,food}){
+        if(isAdd)
+       commit(INCREMENT_FOOD_COUNT,{food})
+       else{
+        commit(DECREMENT_FOOD_COUNT,{food})
+       }
     }
 
 }

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
@@ -6,7 +7,9 @@ import {
     RESET_USER_INFO,
     RECEIVE_SHOP_GOODS,
     RECEIVE_SHOP_COMMENT,
-    RECEIVE_SHOP_INFO
+    RECEIVE_SHOP_INFO,
+    INCREMENT_FOOD_COUNT,
+    DECREMENT_FOOD_COUNT
 } from './mutations-type'
 
 export default {
@@ -33,5 +36,22 @@ export default {
     },
     [RECEIVE_SHOP_INFO](state,{shopInfo}){
         state.shopInfo=shopInfo
+    },
+    [INCREMENT_FOOD_COUNT](state,{food}){
+       if(!food.count){
+        Vue.set(food,'count',1)
+        state.cartFoods.push(food)
+       }else{
+           food.count++
+       }
+    },
+    [DECREMENT_FOOD_COUNT](state,{food}){
+        if(food.count>1)
+        food.count--
+        else{
+            const index=state.cartFoods.indexOf(food)
+            state.cartFoods.splice(index,1)
+            food.count--
+        }
     }
 }
