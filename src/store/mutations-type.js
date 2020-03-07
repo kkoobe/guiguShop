@@ -9,6 +9,10 @@ export const RECEIVE_SHOP_COMMENT ='receive_shop_comment'
 export const RECEIVE_SHOP_INFO ='receive_shop_info'
 export const INCREMENT_FOOD_COUNT='increment_food_count'
 export const DECREMENT_FOOD_COUNT='decrement_food_count'
+export const CLEAR_CARTFOODS='clear_CartFoods'
+export const RECEIVE_USER_COMMENT='receive_user_comment'
+
+
 
 
 

@@ -9,7 +9,9 @@ import {
     RECEIVE_SHOP_COMMENT,
     RECEIVE_SHOP_INFO,
     INCREMENT_FOOD_COUNT,
-    DECREMENT_FOOD_COUNT
+    DECREMENT_FOOD_COUNT,
+    CLEAR_CARTFOODS,
+    RECEIVE_USER_COMMENT
 } from './mutations-type'
 
 export default {
@@ -53,5 +55,14 @@ export default {
             state.cartFoods.splice(index,1)
             food.count--
         }
+    },
+    [CLEAR_CARTFOODS](state){
+        state.cartFoods.forEach(food => {
+            food.count=0
+        });
+        state.cartFoods=[]
+    },
+    [RECEIVE_USER_COMMENT](state,{userComment}){
+        state.userComment=userComment
     }
 }

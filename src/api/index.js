@@ -26,5 +26,5 @@ export const reqLogout = () => ajax(pathHeader+'/logout')
 // mock接口；
 
 export const reqShopGoods= ()=>ajax('/goods');
-export const reqShopComment= () =>ajax('/comment');
+export const reqUserComment= () =>ajax('/comment');
 export const reqShopInfo = ()=>ajax('/info');

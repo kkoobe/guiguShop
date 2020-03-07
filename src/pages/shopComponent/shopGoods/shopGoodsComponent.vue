@@ -123,9 +123,16 @@ export default {
   },
   mounted(){
     // console.log(this.shopGoods)
+    if(this.shopGoods.length!=0){
+      this.$nextTick(()=>{
+          this._initTops();
+          this._initScroll();
+          
+        })
+    }
     if(this.shopGoods.length==0){
     this.getShopGoods()
-    }
+      }
   },
   watch:{
     shopGoods(){

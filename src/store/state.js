@@ -10,8 +10,8 @@ export default {
     shops:[], //商家列表
     userInfo:{},//用户信息
     shopGoods:[],//商品分类
-    shopComments:[],//商家评论
     shopInfo:{},//商家信息
     cartFoods:[],//购物车商品
+    userComment:[],//用户评论信息
 
 }

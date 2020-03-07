@@ -8,7 +8,9 @@ import {
     RECEIVE_SHOP_GOODS,
     RECEIVE_SHOP_INFO,
     INCREMENT_FOOD_COUNT,
-    DECREMENT_FOOD_COUNT
+    DECREMENT_FOOD_COUNT,
+    CLEAR_CARTFOODS,
+    RECEIVE_USER_COMMENT
 } from './mutations-type'
 import {
     reqAddress,
@@ -16,9 +18,9 @@ import {
     reqShops,
     reqUserInfo,
     reqLogout,
-    reqShopComment,
     reqShopInfo,
-    reqShopGoods
+    reqShopGoods,
+    reqUserComment
 } from '../api/index'
 
 export default {
@@ -99,6 +101,17 @@ export default {
        else{
         commit(DECREMENT_FOOD_COUNT,{food})
        }
+    },
+    clearCartFoods({commit}){
+        commit(CLEAR_CARTFOODS)
+    },
+    async getUserComment({commit}){
+        const result=await reqUserComment()
+        if(result.code===0){
+            console.log(result)
+            const data=result.data;
+        commit(RECEIVE_USER_COMMENT,{userComment:data})
+        }
     }
 
 }
