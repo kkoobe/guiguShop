@@ -66,18 +66,17 @@
 import BScroll from 'better-scroll'
 import {mapState} from 'vuex'
 export default {
-  methods:{
-    data(){
-      return {
-      }
-    }
+  data(){
+    return {}
   },
   computed:{
     ...mapState(['shopInfo'])
   },
   methods:{
     _initScroll(){
-      new BScroll('.shop-info',)
+      new BScroll('.shop-info',{
+        click:true
+      })
 
       let ulObj=this.$refs.picUl;
       console.log(ulObj);
@@ -96,7 +95,19 @@ export default {
     }
   },
   mounted(){
+    if(this.shopInfo.length!=0)
+    this.$nextTick(()=>{
+      console.log(this.shopInfo.pics)
       this._initScroll()
+    })
+      
+  },
+  watch:{
+    shopInfo(){
+      this.$nextTick(()=>{
+        this._initScroll()
+      })
+    }
   }
 }
 </script>

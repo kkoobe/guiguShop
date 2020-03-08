@@ -53,7 +53,7 @@
                 <span class="iconfont" :class="user.rateType===0?'icon-thumb_up':'icon-thumb_down'"></span> 
                 <span class="item" v-for="(recommend,index) in user.recommend" :key="index">{{recommend}}</span> 
               </div> 
-              <div class="time">{{user.rateTime | timeFilter}}</div> 
+              <div class="time">{{user.rateTime | dateFormat}}</div> 
             </div> 
           </li> 
         </ul> 
@@ -130,19 +130,21 @@ export default {
   components:{
     starComponent
   },
-  filters:{
-    timeFilter:function(input){
-      console.log('time:'+input)
-      let date=new Date(input)
-      let year=date.getFullYear()
-      let month=date.getMonth()+1;
-      let day=date.getDate();
-      let hours=date.getHours()>=10?date.getHours():'0'+date.getHours()
-      let minutes=date.getMinutes()>=10?date.getMinutes():'0'+date.getMinutes()
-      let seconds=date.getSeconds()>=10?date.getSeconds():'0'+date.getSeconds()
-      return year+'/'+month+'/'+day+' '+hours+':'+minutes+':'+seconds
-    }
-  },
+
+  // 使用全局的filter代替
+  // filters:{
+  //   timeFilter:function(input){
+  //     console.log('time:'+input)
+  //     let date=new Date(input)
+  //     let year=date.getFullYear()
+  //     let month=date.getMonth()+1;
+  //     let day=date.getDate();
+  //     let hours=date.getHours()>=10?date.getHours():'0'+date.getHours()
+  //     let minutes=date.getMinutes()>=10?date.getMinutes():'0'+date.getMinutes()
+  //     let seconds=date.getSeconds()>=10?date.getSeconds():'0'+date.getSeconds()
+  //     return year+'/'+month+'/'+day+' '+hours+':'+minutes+':'+seconds
+  //   }
+  // },
   watch:{
     commentList(){
        this.$nextTick(()=>{

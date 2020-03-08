@@ -13,5 +13,6 @@ export default {
     shopInfo:{},//商家信息
     cartFoods:[],//购物车商品
     userComment:[],//用户评论信息
+    searchShops:{},//搜索到的商家信息
 
 }

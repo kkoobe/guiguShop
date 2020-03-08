@@ -11,7 +11,8 @@ import {
     INCREMENT_FOOD_COUNT,
     DECREMENT_FOOD_COUNT,
     CLEAR_CARTFOODS,
-    RECEIVE_USER_COMMENT
+    RECEIVE_USER_COMMENT,
+    RECEIVE_SEARCH_SHOPS
 } from './mutations-type'
 
 export default {
@@ -64,5 +65,8 @@ export default {
     },
     [RECEIVE_USER_COMMENT](state,{userComment}){
         state.userComment=userComment
+    },
+    [RECEIVE_SEARCH_SHOPS](state,{searchShops}){
+        state.searchShops=searchShops
     }
 }

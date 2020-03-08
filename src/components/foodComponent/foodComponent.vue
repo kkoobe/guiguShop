@@ -1,8 +1,8 @@
 <template> 
     <div class="food">
         <div class="food-content"> 
-            <div class="image-header"> 
-                <img :src="food.image"> 
+            <div class="image-header">
+                <img v-lazy="food.image" alt="">
                 <p class="foodpanel-desc">{{food.info}}</p> 
                 <div class="back"> 
                     <i class="iconfont icon-arrow_left" @click="hiddenFoodImg"></i> 

@@ -10,7 +10,8 @@ import {
     INCREMENT_FOOD_COUNT,
     DECREMENT_FOOD_COUNT,
     CLEAR_CARTFOODS,
-    RECEIVE_USER_COMMENT
+    RECEIVE_USER_COMMENT,
+    RECEIVE_SEARCH_SHOPS
 } from './mutations-type'
 import {
     reqAddress,
@@ -20,7 +21,8 @@ import {
     reqLogout,
     reqShopInfo,
     reqShopGoods,
-    reqUserComment
+    reqUserComment,
+    reqShopsWithKey,
 } from '../api/index'
 
 export default {
@@ -111,6 +113,14 @@ export default {
             console.log(result)
             const data=result.data;
         commit(RECEIVE_USER_COMMENT,{userComment:data})
+        }
+    },
+    async getSearchShops({commit,state},keyword){
+        const geohash=state.latitude+','+state.longitude
+        const result=await reqShopsWithKey({geohash,keyword})
+        if(result.code===0){
+            const data=result.data;
+            commit(RECEIVE_SEARCH_SHOPS,{searchShops:data})
         }
     }
 
